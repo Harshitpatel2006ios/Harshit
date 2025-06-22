@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCORD</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for smoother transitions and positioning */
+        .carousel-item {
+            min-width: 100%; /* Each item takes full width */
+            transition: transform 0.5s ease-in-out;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content horizontally */
+            text-align: center;
+            height: 100vh; /* Full viewport height */
+            color: white;
+        }
+        .carousel-content {
+            z-index: 10; /* Ensure content is above overlay */
+            position: absolute;
+            top: 20%; /* Adjust as needed to position text */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%; /* Max width for content on small screens */
+            max-width: 700px; /* Limit content width on large screens */
+        }
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Slightly dark overlay for text readability */
+            z-index: 5;
+        }
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .dot {
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: white;
+        }
+
+        /* Basic responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .carousel-content {
+                top: 15%; /* Adjust content position for smaller screens */
+                width: 95%;
+            }
+            .carousel-content h1 {
+                font-size: 2.5rem; /* Smaller font size for title */
+            }
+            .carousel-content p {
+                font-size: 1rem; /* Smaller font size for subtitle */
+            }
+            .carousel-buttons button {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+    <div class="logo">ACCORD</div>
+
+    <nav class="center-nav">
+      <a href="#">About</a>
+      <a href="#">Courses</a>
+      <a href="#">Images</a>
+      <a href="#">Achivements</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <div class="right-icons">
+      <a href="#"><i class="fas fa-question-circle"></i></a>
+      <a href="#"><i class="fas fa-globe"></i></a>
+      <a href="#"><i class="fas fa-user"></i></a>
+    </div>
+  </header>
+
+    <main>
+
+        <section>
+
+
+    <div class="relative w-full overflow-hidden">
+        <div id="carouselContainer" class="carousel-container">
+            <!-- Slide 1: Model 3 -->
+            <div class="carousel-item" style="background-image: url('Img/holi2.jpeg');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4">DRAWING</h1>
+                    <p class="text-xl md:text-2xl mb-8">0% APR Ending June 30</p>
+                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out">
+                            Order Now
+                        </button>
+                        <button class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out">
+                            View Inventory
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Model S -->
+            <div class="carousel-item" style="background-image: url('https://placehold.co/1920x1080/0A0A0A/FFFFFF?text=Tesla+Model+S+Image');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4">TUITION</h1>
+                    <p class="text-xl md:text-2xl mb-8">Plaid. Performance. Perfection.</p>
+                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out">
+                            Order Now
+                        </button>
+                        <button class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out">
+                            View Inventory
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Model X -->
+            <div class="carousel-item" style="background-image: url('https://placehold.co/1920x1080/0A0A0A/FFFFFF?text=Tesla+Model+X+Image');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4">MATHS</h1>
+                    <p class="text-xl md:text-2xl mb-8">Unrivaled Utility</p>
+                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out">
+                            Order Now
+                        </button>
+                        <button class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out">
+                            View Inventory
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full shadow-lg focus:outline-none z-20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full shadow-lg focus:outline-none z-20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+
+        <!-- Pagination Dots -->
+        <div id="paginationDots" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+            <!-- Dots will be dynamically generated here -->
+        </div>
+    </div>
+
+        </section>
+
+
+        <section id="about" class="about-section section-padding">
+            <div class="container">
+                <h2 class="section-title">About Harshit Patel</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="Img/dp.jpeg" alt="Harshit Patel">
+                    </div>
+                    <div class="about-text">
+                        <p>Hello! I'm Harshit Patel, and I've dedicated the last 3 yearsto fostering a love for learning in young minds. My passion lies in creating an engaging and supportive environment where every child can thrive academically and personally.</p>
+                x
+                    </div>
+                </div>
+        </section>
+
+        <section id="services" class="services-section section-padding">
+            <div class="container">
+                <h2 class="section-title">Our Programs</h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="fas fas fa-child"></i></div>
+                        <h3>TUITIONS</h3>
+                        <ul>
+                            <li>Nursery to Srkg</li>
+                            <li>Primary School</li>
+                            <li>Secondary School</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="fas fa-child"></i></div>
+                        <h3>PLAYSCHOOL</h3>
+                        <ul>
+                            <li>Nursery</li>
+                            <li>Junior Kindergarten (Jr. KG)</li>
+                            <li>Senior Kindergarten (Sr. KG)</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="fas fa-child"></i></div>
+                        <h3>DRAWING CLASS</h3>
+                        <ul>
+                            <li>Faces</li>
+                            <li>Elementary & Intermediate</li>
+                            <li>Colouring and Shading</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="fas fa-child"></i></div>
+                        <h3>PERSONAL CLASS</h3>
+                        <ul>
+                            <li>Mathematics</li>
+                            <li>Computer</li>
+                            <li>English</li>
+                            <li>Science</li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery-section section-padding">
+            <div class="container">
+                <h2 class="section-title">Our Learning Environment</h2>
+                <div class="gallery-grid">
+                    <img src="Img/class1.jpeg" alt="Classroom 1">
+                    <img src="Img/class2.jpeg" alt="Classroom1">
+                    <img src="Img/hall.jpeg" alt="Student Activity">
+                    <img src="Img/holi2.jpeg" alt="Learning Resources">
+                    <img src="Img/wallpaper.jpeg" alt="Group Study">
+                    <img src="Img/hoki1.jpeg" alt="Creative Corner">
+                    <img src="Img/holi3.jpeg" alt="Drawings">
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="achievements-section section-padding">
+            <div class="container">
+                <h2 class="section-title">Our Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <i class="fas fa-user-graduate icon-large"></i>
+                        <h3>100+ Successful Students</h3>
+                        <p>Helped over a hundred students achieve their academic goals and build strong foundations.</p>
+                    </div>
+                    <div class="achievement-card">
+                        <i class="fas fa-user-graduate icon-large"></i>
+                        <h3>Points System</h3>
+                        <p>A system that makes students studies feel like a game more and burden less</p>
+                    </div>
+                    <div class="achievement-card">
+                        <i class="fas fa-user-graduate icon-large"></i>
+                        <h3>Consistent High Scores</h3>
+                        <p>Our students consistently demonstrate significant improvement and achieve excellent results in their examinations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="contact" class="contact-section section-padding">
+    <div class="container">
+        <h2 class="section-title">Get in Touch</h2>
+
+        <div style="width: 100%; margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.4021487272174!2d72.80503207515058!3d19.181547047248335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7af2af021d707%3A0xc5b60861a5c9e1c5!2sArtisan%20Drawing%20Classes!5e0!3m2!1sen!2sin!4v1718787487475!5m2!1sen!2sin"
+                width="100%"
+                height="400"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <div class="contact-grid" style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div class="contact-info-card" style="flex: 1; min-width: 250px;">
+                <h3><i class="fas fa-phone-alt"></i> Call Us</h3>
+                <p><a href="tel:+918080756214">+91 8080756214</a></p>
+            </div>
+
+            <div class="contact-info-card" style="flex: 1; min-width: 250px;">
+                <h3><i class="fas fa-clock"></i> Opening Hours</h3>
+                <p>Monday – Saturday: 9:00 AM – 9:00 PM</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="tesla-footer">
+  <div class="footer-links">
+    <span>Tesla © 2025</span>
+    <a href="#">Privacy & Legal</a>
+    <a href="#">Vehicle Recalls</a>
+    <a href="#">Contact</a>
+    <a href="#">News</a>
+    <a href="#">Get Updates</a>
+    <a href="#">Locations</a>
+    <a href="#">Learn</a>
+  </div>
+</footer>
+
+    <script src="script.js"></script>
+    </div>
+</body>
+</html>
