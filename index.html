@@ -1,354 +1,238 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ACCORD</title>
-        <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCORD</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 
-    </head>
-    <body>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-<style>
-  /* Background for mobile menu */
-  .navbar-collapse {
-    background-color: #f8f9fa; /* Light background for open menu */
-    padding: 1rem;
-    border-radius: 0 0 10px 10px;
-  }
+    <header class="navbar navbar-expand-lg bg-light shadow-sm py-2 px-3">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">ACCORD</a>
 
-  /* Optional: dark version */
-  /* .navbar-collapse {
-    background-color: #343a40;
-  } */
-</style>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<header class="navbar navbar-expand-lg bg-light shadow-sm py-2 px-3">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand fw-bold" href="#">ACCORD</a>
+            <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 text-center">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Images</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
 
-    <!-- Toggler -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+                <div class="d-flex align-items-center gap-3 justify-content-center mt-3 mt-lg-0">
+                    <a href="user.html"><i class="fas fa-user text-dark"></i></a>
 
-    <!-- Nav Links + Icons -->
-    <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
-      
-      <!-- Center Nav -->
-      <!-- Nav Links + Icons -->
-    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 text-center">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services">Courses</a></li>
-        <li class="nav-item"><a class="nav-link" href="#gallery">Images</a></li>
-        <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-    </ul>
-
-
-      <!-- Right Icons -->
-      <!-- Right Icons + Dark Mode Toggle -->
-<div class="d-flex align-items-center gap-3 justify-content-center mt-3 mt-lg-0">
-  <a href="user.html"><i class="fas fa-user text-dark"></i></a>
-
-  <!-- Dark Mode Toggle Button -->
-  <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm rounded-pill px-3 fw-semibold" type="button">
-    🌙 Dark Mode
-  </button>
-</div>
-
-    </div>
-  </div>
-</header>
-
-
-
-
-        <main>
-
-            <section style="position: relative; width: 100%; overflow: hidden;">
-    <div id="carouselContainer" style="width: 100%;">
-
-        <!-- Slide: Google-inspired -->
-        <div style="
-    position: relative;
-    height: 100vh;
-    background: url('https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    ">
-    <div style="
-        position: absolute;
-        inset: 0;
-        background-color: rgba(255, 255, 255, 0.596);
-    "></div>
-    <div style="position: relative; color: #3a3737; max-width: 800px; padding: 20px;">
-        <h1 style="font-size: 3rem; font-weight: bold; line-height: 1.2; margin-bottom: 20px;">
-        “Empower&nbsp;Minds,<br>Fuel&nbsp;Futures.”
-        </h1>
-        <p style="font-size: 1.25rem; margin-bottom: 30px;">
-        Inspiring curiosity, creativity & confidence—every&nbsp;step of the way.
-        </p>
-        <div style="display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
-        <button style="
-            background-color: #4285F4;
-            color: #fff;
-            font-weight: 600;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 25px;
-            box-shadow: 0 6px 15px rgba(134, 176, 243, 0.4);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        " onmouseover="this.style.backgroundColor='#3367D6'" onmouseout="this.style.backgroundColor='#4285F4'">
-            Learn More
-        </button>
-        <button style="
-            background-color: #f17065;
-            color: #fff;
-            font-weight: 600;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 25px;
-            box-shadow: 0 6px 15px rgba(219, 68, 55, 0.4);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        " onmouseover="this.style.backgroundColor='#C33D2F'" onmouseout="this.style.backgroundColor='#DB4437'">
-            Contact Us
-        </button>
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm rounded-pill px-3 fw-semibold" type="button">
+                        🌙 Dark Mode
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
+    </header>
 
+    <main>
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>
+                    “Empower Minds,<br>Fuel Futures.”
+                </h1>
+                <p>
+                    Inspiring curiosity, creativity & confidence—every step of the way.
+                </p>
+                <div class="hero-buttons">
+                    <button class="hero-button" onclick="location.href='#about'">
+                        Learn More
+                    </button>
+                    <button class="hero-button" style="background-color: #f17065;" onmouseover="this.style.backgroundColor='#C33D2F'" onmouseout="this.style.backgroundColor='#DB4437'" onclick="location.href='#contact'">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+        </section>
 
-
-            <section id="about" class="about-section section-padding">
-                <div class="container">
-                    <h2 class="section-title">About Harshit Patel</h2>
-                    <div class="about-content">
-                        <div class="about-image">
-                            <img src="Img/dp.jpeg" alt="Harshit Patel">
-                        </div>
-                        <div class="about-text">
-                            <p>Hello! I'm Harshit Patel, and I've dedicated the last 3 yearsto fostering a love for learning in young minds. My passion lies in creating an engaging and supportive environment where every child can thrive academically and personally.</p>
-                    x
-                        </div>
+        <section id="about" class="about-section section-padding">
+            <div class="container">
+                <h2 class="section-title">About Harshit Patel</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="Img/dp.jpeg" alt="Harshit Patel">
                     </div>
-            </section>
-
-            <!-- OUR PROGRAMS SECTION -->
-    <section id="services" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-5 text-primary fw-bold">Our Programs</h2>
-    <div class="row g-4">
-      
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm border-0 rounded-4">
-          <div class="card-body text-center">
-            <div class="mb-3 fs-2 text-info"><i class="fas fa-child"></i></div>
-            <h5 class="card-title fw-semibold text-dark">TUITIONS</h5>
-            <ul class="list-unstyled text-secondary mt-3">
-              <li>Nursery to Srkg</li>
-              <li>Primary School</li>
-              <li>Secondary School</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm border-0 rounded-4">
-          <div class="card-body text-center">
-            <div class="mb-3 fs-2 text-info"><i class="fas fa-child"></i></div>
-            <h5 class="card-title fw-semibold text-dark">PLAYSCHOOL</h5>
-            <ul class="list-unstyled text-secondary mt-3">
-              <li>Nursery</li>
-              <li>Junior Kindergarten (Jr. KG)</li>
-              <li>Senior Kindergarten (Sr. KG)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm border-0 rounded-4">
-          <div class="card-body text-center">
-            <div class="mb-3 fs-2 text-info"><i class="fas fa-paint-brush"></i></div>
-            <h5 class="card-title fw-semibold text-dark">DRAWING CLASS</h5>
-            <ul class="list-unstyled text-secondary mt-3">
-              <li>Faces</li>
-              <li>Elementary & Intermediate</li>
-              <li>Colouring and Shading</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm border-0 rounded-4">
-          <div class="card-body text-center">
-            <div class="mb-3 fs-2 text-info"><i class="fas fa-user-graduate"></i></div>
-            <h5 class="card-title fw-semibold text-dark">PERSONAL CLASS</h5>
-            <ul class="list-unstyled text-secondary mt-3">
-              <li>Mathematics</li>
-              <li>Computer</li>
-              <li>English</li>
-              <li>Science</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-        <section id="gallery" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-5 text-primary fw-bold">Our Learning Environment</h2>
-
-    <div class="masonry-gallery">
-      <img src="Img/class1.jpeg" alt="Classroom 1" class="gallery-img">
-      <img src="Img/class2.jpeg" alt="Classroom 2" class="gallery-img">
-      <img src="Img/hall.jpeg" alt="Student Activity" class="gallery-img">
-      <img src="Img/holi2.jpeg" alt="Learning Resources" class="gallery-img">
-      <img src="Img/wallpaper.jpeg" alt="Group Study" class="gallery-img">
-      <img src="Img/hoki1.jpeg" alt="Creative Corner" class="gallery-img">
-      <img src="Img/holi3.jpeg" alt="Drawings" class="gallery-img">
-    </div>
-  </div>
-</section>
-
-<style>
-  .masonry-gallery {
-    column-count: 3;
-    column-gap: 20px;
-  }
-
-  .gallery-img {
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    display: block;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.4s ease;
-  }
-
-  .gallery-img:hover {
-    transform: scale(1.03);
-  }
-
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
-    .masonry-gallery {
-      column-count: 1;
-      column-gap: 0;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 991px) {
-    .masonry-gallery {
-      column-count: 2;
-    }
-  }
-</style>
-
-
-
-            <section id="achievements" class="achievements-section section-padding">
-                <div class="container">
-                    <h2 class="section-title">Our Achievements</h2>
-                    <div class="achievements-grid">
-                        <div class="achievement-card">
-                            <i class="fas fa-user-graduate icon-large"></i>
-                            <h3>100+ Successful Students</h3>
-                            <p>Helped over a hundred students achieve their academic goals and build strong foundations.</p>
-                        </div>
-                        <div class="achievement-card">
-                            <i class="fas fa-user-graduate icon-large"></i>
-                            <h3>Points System</h3>
-                            <p>A system that makes students studies feel like a game more and burden less</p>
-                        </div>
-                        <div class="achievement-card">
-                            <i class="fas fa-user-graduate icon-large"></i>
-                            <h3>Consistent High Scores</h3>
-                            <p>Our students consistently demonstrate significant improvement and achieve excellent results in their examinations.</p>
-                        </div>
+                    <div class="about-text">
+                        <p>Hello! I'm Harshit Patel, and I've dedicated the last 3 years to fostering a love for learning in young minds. My passion lies in creating an engaging and supportive environment where every child can thrive academically and personally.</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-    <section id="contact" class="contact-section section-padding py-5">
-    <div class="container">
-        <h2 class="section-title text-center mb-4">Get in Touch</h2>
-
-        <!-- Google Map -->
-        <div class="mb-4 rounded-3 overflow-hidden shadow" style="box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.4021487272174!2d72.80503207515058!3d19.181547047248335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7af2af021d707%3A0xc5b60861a5c9e1c5!2sArtisan%20Drawing%20Classes!5e0!3m2!1sen!2sin!4v1718787487475!5m2!1sen!2sin"
-                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-
-        <!-- Contact Info -->
-            <div class="row gy-4">
-                <!-- Call Us -->
-                <div class="col-md-6">
-                    <div class="p-4 rounded-3 shadow-sm bg-white h-100">
-                        <h3 class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i>Call Us</h3>
-                        <p class="mb-0"><a href="tel:+918080756214" class="text-decoration-none text-dark">+91 8080756214</a></p>
+        <section id="services" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5 text-primary fw-bold">Our Programs</h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center">
+                                <div class="mb-3 fs-2 text-info"><i class="fas fa-child"></i></div>
+                                <h5 class="card-title fw-semibold text-dark">TUITIONS</h5>
+                                <ul class="list-unstyled text-secondary mt-3">
+                                    <li>Nursery to Srkg</li>
+                                    <li>Primary School</li>
+                                    <li>Secondary School</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Opening Hours -->
-                <div class="col-md-6">
-                    <div class="p-4 rounded-3 shadow-sm bg-white h-100">
-                        <h3 class="mb-3 d-flex align-items-center text-dark">
-                            <i class="fas fa-clock me-2 text-primary"></i>Opening Hours
-                        </h3>
-                        <div class="row">
-                            <div class="col-6 text-dark fw-semibold">Monday</div>
-                            <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
-                            <div class="col-6 text-dark fw-semibold">Tuesday</div>
-                            <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
-                            <div class="col-6 text-dark fw-semibold">Wednesday</div>
-                            <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
-                            <div class="col-6 text-dark fw-semibold">Thursday</div>
-                            <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
-                            <div class="col-6 text-dark fw-semibold">Friday</div>
-                            <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
-                            <div class="col-6 text-dark fw-semibold">Saturday</div>
-                            <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
-                            <div class="col-6 text-dark fw-semibold">Sunday</div>
-                            <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center">
+                                <div class="mb-3 fs-2 text-info"><i class="fas fa-child"></i></div>
+                                <h5 class="card-title fw-semibold text-dark">PLAYSCHOOL</h5>
+                                <ul class="list-unstyled text-secondary mt-3">
+                                    <li>Nursery</li>
+                                    <li>Junior Kindergarten (Jr. KG)</li>
+                                    <li>Senior Kindergarten (Sr. KG)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center">
+                                <div class="mb-3 fs-2 text-info"><i class="fas fa-paint-brush"></i></div>
+                                <h5 class="card-title fw-semibold text-dark">DRAWING CLASS</h5>
+                                <ul class="list-unstyled text-secondary mt-3">
+                                    <li>Faces</li>
+                                    <li>Elementary & Intermediate</li>
+                                    <li>Colouring and Shading</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center">
+                                <div class="mb-3 fs-2 text-info"><i class="fas fa-user-graduate"></i></div>
+                                <h5 class="card-title fw-semibold text-dark">PERSONAL CLASS</h5>
+                                <ul class="list-unstyled text-secondary mt-3">
+                                    <li>Mathematics</li>
+                                    <li>Computer</li>
+                                    <li>English</li>
+                                    <li>Science</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-</section>
+        </section>
 
-<footer class="tesla-footer mt-5 py-4 bg-dark text-white text-center">
-    <div class="footer-links d-flex flex-wrap justify-content-center gap-3">
-        <span>Accord © 2025</span>
-        <a href="#" class="text-white text-decoration-none">Privacy & Legal</a>
-        <a href="#" class="text-white text-decoration-none">Contact</a>
-        <a href="#" class="text-white text-decoration-none">News</a>
-        <a href="#" class="text-white text-decoration-none">Get Updates</a>
-        <a href="#" class="text-white text-decoration-none">Locations</a>
-        <a href="#" class="text-white text-decoration-none">Learn</a>
-    </div>
-</footer>
+        <section id="gallery" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5 text-primary fw-bold">Our Learning Environment</h2>
+                <div class="masonry-gallery">
+                    <img src="Img/class1.jpeg" alt="Classroom 1" class="gallery-img">
+                    <img src="Img/class2.jpeg" alt="Classroom 2" class="gallery-img">
+                    <img src="Img/hall.jpeg" alt="Student Activity" class="gallery-img">
+                    <img src="Img/holi2.jpeg" alt="Learning Resources" class="gallery-img">
+                    <img src="Img/wallpaper.jpeg" alt="Group Study" class="gallery-img">
+                    <img src="Img/hoki1.jpeg" alt="Creative Corner" class="gallery-img">
+                    <img src="Img/holi3.jpeg" alt="Drawings" class="gallery-img">
+                </div>
+            </div>
+        </section>
 
-        <script src="script.js"></script>
+        <section id="achievements" class="achievements-section section-padding">
+            <div class="container">
+                <h2 class="section-title">Our Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <i class="fas fa-user-graduate icon-large"></i>
+                        <h3>100+ Successful Students</h3>
+                        <p>Helped over a hundred students achieve their academic goals and build strong foundations.</p>
+                    </div>
+                    <div class="achievement-card">
+                        <i class="fas fa-user-graduate icon-large"></i>
+                        <h3>Points System</h3>
+                        <p>A system that makes students studies feel like a game more and burden less</p>
+                    </div>
+                    <div class="achievement-card">
+                        <i class="fas fa-user-graduate icon-large"></i>
+                        <h3>Consistent High Scores</h3>
+                        <p>Our students consistently demonstrate significant improvement and achieve excellent results in their examinations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section section-padding py-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-4">Get in Touch</h2>
+
+                <div class="mb-4 rounded-3 overflow-hidden shadow" style="box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.1058725910916!2d72.8073897!3d19.3645679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7af2af021d707%3A0xc5b60861a5c9e1c5!2sArtisan%20Drawing%20Classes!5e0!3m2!1sen!2sin!4v1751226881059!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3 shadow-sm bg-white h-100">
+                            <h3 class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i>Call Us</h3>
+                            <p class="mb-0"><a href="tel:+918080756214" class="text-decoration-none text-dark">+91 8080756214</a></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3 shadow-sm bg-white h-100">
+                            <h3 class="mb-3 d-flex align-items-center text-dark">
+                                <i class="fas fa-clock me-2 text-primary"></i>Opening Hours
+                            </h3>
+                            <div class="row">
+                                <div class="col-6 text-dark fw-semibold">Monday</div>
+                                <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                                <div class="col-6 text-dark fw-semibold">Tuesday</div>
+                                <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                                <div class="col-6 text-dark fw-semibold">Wednesday</div>
+                                <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                                <div class="col-6 text-dark fw-semibold">Thursday</div>
+                                <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                                <div class="col-6 text-dark fw-semibold">Friday</div>
+                                <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                                <div class="col-6 text-dark fw-semibold">Saturday</div>
+                                <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                                <div class="col-6 text-dark fw-semibold">Sunday</div>
+                                <div class="col-6 text-muted">10:00 AM – 10:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="tesla-footer mt-5 py-4 bg-dark text-white text-center">
+        <div class="footer-links d-flex flex-wrap justify-content-center gap-3">
+            <span>Accord © 2025</span>
+            <a href="#" class="text-white text-decoration-none">Privacy & Legal</a>
+            <a href="#" class="text-white text-decoration-none">Contact</a>
+            <a href="#" class="text-white text-decoration-none">News</a>
+            <a href="#" class="text-white text-decoration-none">Get Updates</a>
+            <a href="#" class="text-white text-decoration-none">Locations</a>
+            <a href="#" class="text-white text-decoration-none">Learn</a>
         </div>
-    </body>
-    </html>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

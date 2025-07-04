@@ -8,151 +8,306 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <style>
-        /* Background for mobile menu */
-        .navbar-collapse {
-            background-color: #f8f9fa; /* Light background for open menu */
-            padding: 1rem;
-            border-radius: 0 0 10px 10px;
+        :root {
+            --light-bg: #f5f7fa;
+            --light-card-bg: #ffffff;
+            --light-text: #343a40;
+            --light-input-border: #e0e0e0;
+            --light-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+            --dark-bg: #212529;
+            --dark-card-bg: #2c3034;
+            --dark-text: #e9ecef;
+            --dark-input-border: #495057;
+            --dark-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+            --primary-color: #5a7dff; /* A slightly softer blue */
+            --primary-hover: #4567e8;
+            --secondary-color: #6c757d;
+            --secondary-hover: #5a6268;
+            --success-bg: #d4edda;
+            --success-text: #155724;
+            --danger-bg: #f8d7da;
+            --danger-text: #721c24;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .form-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 150px); /* Adjust based on header/footer height */
-            padding: 40px 0;
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
 
-        .form-container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
+        /* Navbar */
+        .navbar {
+            background-color: var(--light-card-bg) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .form-container h2 {
-            color: #3a3737;
-            margin-bottom: 30px;
+        body.dark-mode .navbar {
+            background-color: var(--dark-card-bg) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
             font-weight: 700;
+            color: var(--light-text) !important;
+            transition: color 0.4s ease;
         }
 
-        .form-control {
-            border-radius: 8px;
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-
-        .form-control:focus {
-            border-color: #4285F4;
-            box-shadow: 0 0 0 0.25rem rgba(66, 133, 244, 0.25);
-        }
-
-        .btn-primary-accord {
-            background-color: #4285F4;
-            color: #fff;
-            font-weight: 600;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
-            cursor: pointer;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            width: 100%;
-        }
-
-        .btn-primary-accord:hover {
-            background-color: #3367D6;
-            box-shadow: 0 6px 15px rgba(51, 103, 214, 0.4);
-        }
-
-        .btn-secondary-accord {
-            background-color: #6c757d;
-            color: #fff;
-            font-weight: 600;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
-            cursor: pointer;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .btn-secondary-accord:hover {
-            background-color: #5a6268;
-            box-shadow: 0 6px 15px rgba(90, 98, 104, 0.4);
-        }
-
-        .toggle-form-text {
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .toggle-form-text a {
-            color: #4285F4;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .toggle-form-text a:hover {
-            text-decoration: underline;
-        }
-
-        .alert-message {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 500;
-            text-align: left;
-        }
-
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+        body.dark-mode .navbar-brand {
+            color: var(--dark-text) !important;
         }
 
         .navbar-nav .nav-link {
-            color: #3a3737 !important;
+            color: var(--light-text) !important;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .navbar-nav .nav-link:hover {
-            color: #4285F4 !important;
+            color: var(--primary-color) !important;
         }
 
+        body.dark-mode .navbar-nav .nav-link {
+            color: var(--dark-text) !important;
+        }
+
+        body.dark-mode .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .navbar-toggler {
+            color: var(--dark-text);
+        }
+
+        .navbar-collapse {
+            background-color: var(--light-card-bg);
+            padding: 1rem;
+            border-radius: 0 0 10px 10px;
+            transition: background-color 0.4s ease;
+        }
+
+        body.dark-mode .navbar-collapse {
+            background-color: var(--dark-card-bg);
+        }
+
+        /* Form Section */
+        .form-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 150px);
+            padding: 40px 0;
+        }
+
+        .form-container {
+            background-color: var(--light-card-bg);
+            padding: 45px;
+            border-radius: 15px;
+            box-shadow: var(--light-shadow);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        body.dark-mode .form-container {
+            background-color: var(--dark-card-bg);
+            box-shadow: var(--dark-shadow);
+        }
+
+        .form-container h2 {
+            color: var(--light-text);
+            margin-bottom: 35px;
+            font-weight: 700;
+            font-size: 2.2rem;
+            transition: color 0.4s ease;
+        }
+
+        body.dark-mode .form-container h2 {
+            color: var(--dark-text);
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 14px 18px;
+            border: 1px solid var(--light-input-border);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            background-color: var(--light-card-bg);
+            color: var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .form-control {
+            background-color: var(--dark-input-border);
+            color: var(--dark-text);
+            border-color: #555;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(90, 125, 255, 0.25);
+            background-color: var(--light-card-bg); /* Keep background consistent on focus */
+        }
+
+        body.dark-mode .form-control:focus {
+            background-color: var(--dark-card-bg);
+            box-shadow: 0 0 0 0.25rem rgba(90, 125, 255, 0.4);
+        }
+
+        /* Buttons */
+        .btn-primary-accord, .btn-secondary-accord {
+            font-weight: 600;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary-accord {
+            background-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 6px 15px rgba(90, 125, 255, 0.35);
+        }
+
+        .btn-primary-accord:hover {
+            background-color: var(--primary-hover);
+            box-shadow: 0 8px 20px rgba(69, 103, 232, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary-accord {
+            background-color: var(--secondary-color);
+            color: #fff;
+            box-shadow: 0 6px 15px rgba(108, 117, 125, 0.3);
+            margin-top: 15px;
+        }
+
+        .btn-secondary-accord:hover {
+            background-color: var(--secondary-hover);
+            box-shadow: 0 8px 20px rgba(90, 98, 104, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Toggle Form Text */
+        .toggle-form-text {
+            margin-top: 25px;
+            font-size: 1rem;
+            color: var(--light-text);
+            transition: color 0.4s ease;
+        }
+
+        body.dark-mode .toggle-form-text {
+            color: var(--dark-text);
+        }
+
+        .toggle-form-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .toggle-form-text a:hover {
+            text-decoration: underline;
+            color: var(--primary-hover);
+        }
+
+        /* Alert Messages */
+        .alert-message {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInSlideUp 0.5s forwards;
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background-color: var(--danger-bg);
+            color: var(--danger-text);
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Footer */
         .tesla-footer {
-            background-color: #212529; /* Darker footer */
-            color: #adb5bd;
-            font-size: 0.9rem;
+            background-color: var(--dark-card-bg); /* Darker footer */
+            color: var(--dark-text);
+            font-size: 0.95rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        body.dark-mode .tesla-footer {
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
         }
 
         .tesla-footer .footer-links a {
-            color: #adb5bd;
+            color: var(--dark-text);
             transition: color 0.3s ease;
         }
 
         .tesla-footer .footer-links a:hover {
             color: #ffffff;
+        }
+
+        /* Dark mode toggle button style */
+        #darkModeToggle {
+            background-color: #f0f2f5;
+            color: #343a40;
+            border-color: #ced4da;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode #darkModeToggle {
+            background-color: #495057;
+            color: #e9ecef;
+            border-color: #6c757d;
+        }
+
+        #darkModeToggle:hover {
+            background-color: #e2e6ea;
+            border-color: #dae0e5;
+        }
+
+        body.dark-mode #darkModeToggle:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
         }
     </style>
 </head>
@@ -173,7 +328,7 @@
                     </ul>
 
                 <div class="d-flex align-items-center gap-3 justify-content-center mt-3 mt-lg-0">
-                    <a href="user.html"><i class="fas fa-user text-dark"></i></a>
+                    <a href="user.html" class="text-decoration-none"><i class="fas fa-user text-dark fa-lg"></i></a>
                     <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm rounded-pill px-3 fw-semibold" type="button">
                         🌙 Dark Mode
                     </button>
@@ -187,8 +342,8 @@
             <div class="form-container">
                 <h2 id="formTitle">Login to ACCORD</h2>
                 <form id="authForm">
-                    <input type="text" id="username" class="form-control" placeholder="Username" required>
-                    <input type="password" id="password" class="form-control" placeholder="Password" required>
+                    <input type="text" id="username" class="form-control" placeholder="Username" required autocomplete="username">
+                    <input type="password" id="password" class="form-control" placeholder="Password" required autocomplete="current-password">
                     <button type="submit" class="btn-primary-accord" id="submitButton">Login</button>
                 </form>
                 <div class="toggle-form-text">
@@ -224,42 +379,38 @@
 
             let isLoginMode = true; // State to track if it's login or registration
 
+            // Function to apply/remove dark mode styles
+            const applyDarkMode = (isDark) => {
+                document.body.classList.toggle('dark-mode', isDark);
+                const userIcon = document.querySelector('.fa-user');
+                if (userIcon) {
+                    userIcon.classList.toggle('text-dark', !isDark);
+                    userIcon.classList.toggle('text-light', isDark);
+                }
+            };
+
+            // Initialize dark mode based on user preference or local storage
+            const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedDarkMode = localStorage.getItem('darkMode');
+
+            if (savedDarkMode === 'true') {
+                applyDarkMode(true);
+                darkModeToggle.innerHTML = '☀️ Light Mode';
+            } else if (savedDarkMode === null && prefersDarkMode) {
+                applyDarkMode(true);
+                darkModeToggle.innerHTML = '☀️ Light Mode';
+            } else {
+                applyDarkMode(false);
+                darkModeToggle.innerHTML = '🌙 Dark Mode';
+            }
+
             // Dark Mode Toggle functionality
             darkModeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                // You'll need to add specific dark mode styles in your <style> block
-                // For example:
-                if (document.body.classList.contains('dark-mode')) {
-                    document.body.style.backgroundColor = '#343a40';
-                    document.querySelector('.navbar').style.backgroundColor = '#212529';
-                    document.querySelector('.navbar').style.color = '#fff';
-                    document.querySelector('.navbar-brand').style.color = '#fff';
-                    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => link.style.color = '#fff');
-                    document.querySelector('.form-container').style.backgroundColor = '#495057';
-                    document.querySelector('.form-container h2').style.color = '#fff';
-                    document.querySelectorAll('.form-control').forEach(input => {
-                        input.style.backgroundColor = '#6c757d';
-                        input.style.color = '#fff';
-                        input.style.borderColor = '#495057';
-                    });
-                    messageDiv.style.color = '#fff'; // Adjust for dark mode messages if needed
-                } else {
-                    document.body.style.backgroundColor = '#f0f2f5';
-                    document.querySelector('.navbar').style.backgroundColor = '#f8f9fa';
-                    document.querySelector('.navbar').style.color = '#000';
-                    document.querySelector('.navbar-brand').style.color = '#000';
-                    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => link.style.color = '#3a3737');
-                    document.querySelector('.form-container').style.backgroundColor = '#ffffff';
-                    document.querySelector('.form-container h2').style.color = '#3a3737';
-                    document.querySelectorAll('.form-control').forEach(input => {
-                        input.style.backgroundColor = '#fff';
-                        input.style.color = '#000';
-                        input.style.borderColor = '#e0e0e0';
-                    });
-                     messageDiv.style.color = ''; // Reset message color
-                }
+                const isDark = document.body.classList.contains('dark-mode');
+                applyDarkMode(!isDark);
+                localStorage.setItem('darkMode', !isDark);
+                darkModeToggle.innerHTML = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
             });
-
 
             toggleFormLink.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -269,71 +420,91 @@
                     submitButton.textContent = 'Login';
                     toggleFormLink.textContent = 'Register here';
                     toggleFormLink.parentNode.firstChild.nodeValue = "Don't have an account? ";
+                    passwordInput.setAttribute('autocomplete', 'current-password');
                 } else {
                     formTitle.textContent = 'Register for ACCORD';
                     submitButton.textContent = 'Register';
                     toggleFormLink.textContent = 'Login here';
                     toggleFormLink.parentNode.firstChild.nodeValue = "Already have an account? ";
+                    passwordInput.setAttribute('autocomplete', 'new-password');
                 }
                 messageDiv.style.display = 'none'; // Clear previous messages
                 usernameInput.value = ''; // Clear fields on toggle
                 passwordInput.value = '';
             });
 
-            authForm.addEventListener('submit', (e) => {
+            authForm.addEventListener('submit', (e) => { // Removed 'async' as no 'await' is used
                 e.preventDefault();
 
-                const username = usernameInput.value;
-                const password = passwordInput.value;
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
 
                 messageDiv.style.display = 'block'; // Show message div
                 messageDiv.classList.remove('alert-success', 'alert-danger'); // Reset classes
 
+                // Basic validation
+                if (username.length < 3) {
+                    messageDiv.classList.add('alert-danger');
+                    messageDiv.textContent = 'Username must be at least 3 characters long.';
+                    return;
+                }
+                if (password.length < 6) {
+                    messageDiv.classList.add('alert-danger');
+                    messageDiv.textContent = 'Password must be at least 6 characters long.';
+                    return;
+                }
+
+                // --- Client-Side Login and Registration Logic ---
                 if (isLoginMode) {
-                    // Login Logic
-                    if (username === 'admin' && password === '123') {
+                    // Login attempt
+                    if (username === 'Harshit Patel' && password === '04052006') {
                         messageDiv.classList.add('alert-success');
-                        messageDiv.textContent = 'Login successful! Welcome, Admin.';
-                        // In a real application, you would redirect to a dashboard
+                        messageDiv.textContent = 'Login successful! Redirecting to teachers page...';
                         setTimeout(() => {
-                            window.location.href = 'index.html'; // Example redirect
-                        }, 1500);
-                    } else if (localStorage.getItem(username) === password) {
-                        messageDiv.classList.add('alert-success');
-                        messageDiv.textContent = `Login successful! Welcome, ${username}.`;
-                        // In a real application, you would redirect to a user dashboard
-                        setTimeout(() => {
-                            window.location.href = 'index.html'; // Example redirect
+                            window.location.href = 'teachers.html'; // Redirect to teachers.html
                         }, 1500);
                     } else {
+                        // General login failure for other credentials
                         messageDiv.classList.add('alert-danger');
                         messageDiv.textContent = 'Invalid username or password.';
                     }
                 } else {
-                    // Registration Logic
-                    if (username === 'admin') {
-                        messageDiv.classList.add('alert-danger');
-                        messageDiv.textContent = 'Cannot register with username "admin". Please choose another.';
-                    } else if (localStorage.getItem(username)) {
-                        messageDiv.classList.add('alert-danger');
-                        messageDiv.textContent = 'Username already exists. Please choose a different one.';
-                    } else {
-                        localStorage.setItem(username, password);
-                        messageDiv.classList.add('alert-success');
-                        messageDiv.textContent = 'Registration successful! You can now log in.';
-                        // Switch back to login mode after successful registration
-                        setTimeout(() => {
-                            isLoginMode = true;
-                            formTitle.textContent = 'Login to ACCORD';
-                            submitButton.textContent = 'Login';
-                            toggleFormLink.textContent = 'Register here';
-                            toggleFormLink.parentNode.firstChild.nodeValue = "Don't have an account? ";
-                            usernameInput.value = '';
-                            passwordInput.value = '';
-                            messageDiv.style.display = 'none'; // Hide message after redirecting to login
-                        }, 1500);
+                    // Registration attempt (simplified for client-side, typically sent to a server)
+                    // In a real application, you'd send this to a backend for user creation
+                    // For this example, we'll just "simulate" a successful registration.
+                    if (username === 'Harshit Patel') { // Prevent registering "Harshit Patel" again
+                         messageDiv.classList.add('alert-danger');
+                         messageDiv.textContent = 'Username "Harshit Patel" is already taken.';
+                         return;
                     }
+
+                    // Store new "registered" user in localStorage for demonstration (highly insecure for production!)
+                    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
+                    if (registeredUsers[username]) {
+                        messageDiv.classList.add('alert-danger');
+                        messageDiv.textContent = 'This username is already registered.';
+                        return;
+                    }
+
+                    registeredUsers[username] = password;
+                    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+
+                    messageDiv.classList.add('alert-success');
+                    messageDiv.textContent = 'Registration successful! You can now log in.';
+                    // Automatically switch to login mode after successful registration
+                    setTimeout(() => {
+                        isLoginMode = true;
+                        formTitle.textContent = 'Login to ACCORD';
+                        submitButton.textContent = 'Login';
+                        toggleFormLink.textContent = 'Register here';
+                        toggleFormLink.parentNode.firstChild.nodeValue = "Don't have an account? ";
+                        usernameInput.value = '';
+                        passwordInput.value = '';
+                        messageDiv.style.display = 'none'; // Clear the message after switching mode
+                    }, 2000);
                 }
+                // --- END Client-Side Logic ---
             });
         });
     </script>
