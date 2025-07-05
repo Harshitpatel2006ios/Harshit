@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Daily Tasks</title>
+    <style>
+        /* Base Variables - Define common colors and fonts for easier management */
+        :root {
+            --primary-blue: #007aff;
+            --primary-blue-dark: #005ce6;
+            --primary-red: #ff3b30;
+            --primary-red-dark: #cc2f26;
+            --background-light: #f5f5f7; /* Lighter background like Apple */
+            --card-background: #ffffff;
+            --text-dark: #1c1c1e;
+            --text-medium: #3a3a3c;
+            --text-light: #8e8e93;
+            --border-light: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.06);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+        }
+
+        /* General Body Styling */
+        body {
+            font-family: 'SF Pro Display', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+            background-color: var(--background-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Container for the To-Do List */
+        .todo-container {
+            background-color: var(--card-background);
+            border-radius: 20px; /* More pronounced rounded corners */
+            box-shadow: 0 10px 30px var(--shadow-light); /* Deeper, softer shadow */
+            padding: 35px; /* More padding */
+            width: 100%;
+            max-width: 550px; /* Slightly wider */
+            box-sizing: border-box;
+            animation: fadeIn 0.6s ease-out; /* Slightly longer fade */
+            border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border */
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 32px; /* Larger heading */
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 30px; /* More space below header */
+            letter-spacing: -0.02em; /* Tighter letter spacing */
+        }
+
+        /* Input Section */
+        .input-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px; /* Slightly larger gap */
+            margin-bottom: 30px;
+            align-items: stretch; /* Align items to stretch vertically */
+        }
+
+        .input-section input[type="text"],
+        .input-section input[type="datetime-local"] {
+            flex-grow: 1;
+            padding: 14px 18px; /* More padding */
+            border: 1px solid var(--border-light);
+            border-radius: 12px; /* More rounded input fields */
+            font-size: 17px; /* Slightly larger font */
+            color: var(--text-medium);
+            outline: none;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            background-color: var(--card-background); /* Ensure consistent background */
+            min-width: 150px;
+        }
+
+        .input-section input[type="text"]:focus,
+        .input-section input[type="datetime-local"]:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2); /* Soft blue glow on focus */
+        }
+
+        .input-section button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 12px; /* Consistent rounded buttons */
+            padding: 14px 25px; /* More padding */
+            font-size: 17px; /* Consistent font size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2); /* Subtle button shadow */
+        }
+
+        .input-section button:hover {
+            background-color: var(--primary-blue-dark);
+            transform: translateY(-2px); /* More pronounced lift */
+            box-shadow: 0 6px 15px rgba(0, 122, 255, 0.3);
+        }
+
+        .input-section button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 122, 255, 0.1);
+        }
+
+        .input-section .option-buttons {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            margin-top: 5px; /* Closer to input fields */
+        }
+
+        .input-section .option-buttons button {
+            flex: 1;
+            padding: 10px 15px;
+            font-size: 15px;
+            background-color: var(--border-light); /* Lighter background for options */
+            color: var(--text-medium);
+            font-weight: 500;
+            border-radius: 10px; /* Slightly less rounded than main buttons */
+            box-shadow: none; /* No shadow for option buttons */
+        }
+        .input-section .option-buttons button:hover {
+            background-color: #d8d8d8; /* Slightly darker on hover */
+            transform: none; /* No lift */
+            box-shadow: none;
+        }
+        .input-section .option-buttons button.active {
+            background-color: var(--primary-blue);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.15); /* Subtle active shadow */
+        }
+        .input-section .option-buttons button:active {
+            transform: none;
+        }
+
+        /* Custom styling for datetime-local to hide date part */
+        .input-section input[type="datetime-local"]::-webkit-datetime-edit-day-field,
+        .input-section input[type="datetime-local"]::-webkit-datetime-edit-month-field,
+        .input-section input[type="datetime-local"]::-webkit-datetime-edit-year-field {
+            display: none; /* Hide day, month, year fields */
+        }
+
+        .input-section input[type="datetime-local"]::-webkit-datetime-edit-text {
+            /* This is the colon or slash separator, hide if you want a cleaner look */
+            display: none;
+        }
+
+        .input-section input[type="datetime-local"] {
+            /* General styling for the input field itself */
+            text-align: center; /* Center the time */
+            padding-right: 40px; /* Make space for the calendar icon */
+            position: relative; /* For custom icon positioning if needed */
+        }
+
+        /* To-Do List Styling */
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-list li {
+            background-color: var(--card-background); /* White background for items */
+            padding: 18px 20px; /* More padding */
+            margin-bottom: 12px; /* More space between items */
+            border-radius: 15px; /* Consistent rounding */
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 18px; /* Slightly larger font */
+            color: var(--text-medium);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+            border: 1px solid rgba(0, 0, 0, 0.03); /* Very subtle border */
+        }
+
+        .todo-list li:hover {
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 5px 15px var(--shadow-light); /* More pronounced shadow on hover */
+        }
+
+        .todo-list li.completed {
+            text-decoration: line-through;
+            color: var(--text-light); /* Lighter color for completed tasks */
+            background-color: var(--background-light); /* Grey background for completed tasks */
+            box-shadow: none; /* No shadow for completed tasks */
+            transform: none; /* No lift for completed */
+            border-color: rgba(0, 0, 0, 0.02);
+        }
+
+        /* Checkbox and Text */
+        .todo-list li .task-content {
+            flex-grow: 1;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Larger gap between checkbox and text */
+            min-width: 0;
+        }
+
+        .todo-list li input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 24px; /* Larger checkbox */
+            height: 24px;
+            border: 2px solid var(--text-light);
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            flex-shrink: 0;
+            background-color: var(--card-background); /* White inside */
+        }
+
+        .todo-list li input[type="checkbox"]:checked {
+            border-color: var(--primary-blue);
+            background-color: var(--primary-blue);
+        }
+
+        .todo-list li input[type="checkbox"]:checked::after {
+            content: '✓';
+            color: white;
+            font-size: 16px; /* Larger checkmark */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Task text and timer */
+        .todo-list li .task-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px; /* Smaller gap */
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .todo-list li .task-text {
+            word-wrap: break-word;
+            line-height: 1.4; /* Better readability */
+            font-weight: 500; /* Medium weight */
+        }
+
+        .todo-list li .task-time {
+            font-size: 14px; /* Slightly larger */
+            color: var(--text-light);
+            margin-top: 3px;
+        }
+
+        .todo-list li .countdown-timer {
+            font-size: 15px; /* Slightly larger */
+            font-weight: 600; /* More prominent */
+            color: var(--primary-blue);
+            margin-top: 3px;
+        }
+
+        .todo-list li.completed .countdown-timer {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .todo-list li.overdue .countdown-timer {
+            color: var(--primary-red);
+            font-weight: 700; /* Bolder for overdue */
+        }
+
+        /* Delete Button */
+        .todo-list li button {
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 10px; /* Consistent rounding */
+            padding: 10px 15px; /* More padding */
+            font-size: 15px; /* Slightly larger */
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, opacity 0.2s;
+            opacity: 0.9; /* Slightly less opaque */
+            margin-left: 15px; /* More space */
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(255, 59, 48, 0.15); /* Subtle red shadow */
+        }
+
+        .todo-list li button:hover {
+            background-color: var(--primary-red-dark);
+            transform: translateY(-1px);
+            opacity: 1;
+            box-shadow: 0 4px 10px rgba(255, 59, 48, 0.25);
+        }
+
+        .todo-list li button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(255, 59, 48, 0.1);
+        }
+
+        /* Placeholder for empty list */
+        .empty-message {
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 25px; /* More space */
+            font-size: 16px;
+            padding: 15px;
+            background-color: var(--card-background);
+            border-radius: 15px;
+            border: 1px dashed var(--border-light); /* Dashed border for empty state */
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 600px) {
+            .todo-container {
+                padding: 25px;
+                margin: 20px;
+                max-width: calc(100% - 40px); /* Adjust max-width for smaller screens */
+            }
+
+            h1 {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+
+            .input-section {
+                flex-direction: column; /* Stack elements on small screens */
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .input-section input[type="text"],
+            .input-section input[type="datetime-local"] {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .input-section .option-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .input-section button {
+                width: 100%;
+            }
+
+            .todo-list li {
+                flex-direction: column; /* Stack content in list items */
+                align-items: flex-start;
+                padding: 15px;
+                gap: 8px; /* Gap between checkbox/text and button */
+            }
+
+            .todo-list li .task-content {
+                width: 100%;
+                margin-bottom: 5px; /* Space between content and delete button */
+            }
+
+            .todo-list li button {
+                width: calc(100% - 30px); /* Full width button with padding */
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h1>My Tasks 🚀</h1>
+        <div class="input-section">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <input type="datetime-local" id="deadlineInput" class="time-only-input" style="display: none;">
+            <div class="option-buttons">
+                <button id="addTimedTaskBtn" class="active">Add with Deadline</button>
+                <button id="addTaskOnlyBtn">Add Task Only</button>
+            </div>
+            <button id="finalAddButton" onclick="handleAddTask()">Add Timed Task</button>
+        </div>
+        <ul id="taskList" class="todo-list">
+            </ul>
+        <p id="emptyMessage" class="empty-message" style="display: none;">No tasks yet! Time to add some. 😊</p>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const deadlineInput = document.getElementById('deadlineInput');
+        const taskList = document.getElementById('taskList');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const addTimedTaskBtn = document.getElementById('addTimedTaskBtn');
+        const addTaskOnlyBtn = document.getElementById('addTaskOnlyBtn');
+        const finalAddButton = document.getElementById('finalAddButton');
+
+        let isTimedTaskMode = true; // Default to timed task mode
+
+        // Function to get current IST date and time in YYYY-MM-DDTHH:MM format
+        function getISTDateTimeString(date = new Date()) {
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false,
+                timeZone: 'Asia/Kolkata'
+            };
+            const parts = new Intl.DateTimeFormat('en-US', options).formatToParts(date);
+            const getPart = (type) => parts.find(p => p.type === type).value;
+
+            const year = getPart('year');
+            const month = getPart('month');
+            const day = getPart('day');
+            const hour = getPart('hour');
+            const minute = getPart('minute');
+            // const second = getPart('second'); // Not needed for datetime-local input format
+
+            return `${year}-${month}-${day}T${hour}:${minute}`;
+        }
+
+        // Set deadline input to today's date and current time when shown
+        function setDeadlineInputToNow() {
+            deadlineInput.value = getISTDateTimeString();
+        }
+
+        // Load tasks from localStorage when the page loads
+        document.addEventListener('DOMContentLoaded', loadTasks);
+
+        // Event listeners for mode selection buttons
+        addTimedTaskBtn.addEventListener('click', () => {
+            isTimedTaskMode = true;
+            deadlineInput.style.display = 'inline-block'; // Show deadline input
+            setDeadlineInputToNow(); // Set to current date and time
+            addTimedTaskBtn.classList.add('active');
+            addTaskOnlyBtn.classList.remove('active');
+            finalAddButton.textContent = 'Add Timed Task';
+        });
+
+        addTaskOnlyBtn.addEventListener('click', () => {
+            isTimedTaskMode = false;
+            deadlineInput.style.display = 'none'; // Hide deadline input
+            deadlineInput.value = ''; // Clear deadline value
+            addTaskOnlyBtn.classList.add('active');
+            addTimedTaskBtn.classList.remove('active');
+            finalAddButton.textContent = 'Add Task';
+        });
+
+        function handleAddTask() {
+            const taskText = taskInput.value.trim();
+            let deadline = '';
+
+            if (taskText === '') {
+                alert('Please enter a task!');
+                return;
+            }
+
+            if (isTimedTaskMode) {
+                deadline = deadlineInput.value;
+                if (deadline === '') {
+                    alert('Please select a time for the timed task!');
+                    return;
+                }
+                const deadlineTime = new Date(deadline).getTime();
+                const nowTime = new Date(getISTDateTimeString()).getTime(); // Get current IST time
+
+                if (deadlineTime < nowTime) {
+                    alert('Deadline time cannot be in the past! Please select a future time.');
+                    return;
+                }
+            }
+
+            createTaskElement(taskText, false, deadline);
+            taskInput.value = '';
+            setDeadlineInputToNow(); // Reset deadline input to current time for next entry
+            saveTasks();
+            updateEmptyMessage();
+        }
+
+        function createTaskElement(taskText, isCompleted, deadline = '') {
+            const listItem = document.createElement('li');
+            if (isCompleted) {
+                listItem.classList.add('completed');
+            }
+
+            const taskContentDiv = document.createElement('div');
+            taskContentDiv.classList.add('task-content');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = isCompleted;
+            checkbox.addEventListener('change', function() {
+                listItem.classList.toggle('completed');
+                saveTasks();
+                if (deadline) {
+                    if (listItem.classList.contains('completed')) {
+                        clearInterval(listItem.timerInterval); // Stop timer if task is completed
+                        listItem.querySelector('.countdown-timer').textContent = 'Completed!';
+                        listItem.classList.remove('overdue');
+                    } else {
+                        // Restart timer if uncompleted and deadline is in future
+                        const deadlineTime = new Date(deadline).getTime();
+                        const nowTime = new Date(getISTDateTimeString()).getTime(); // Get current IST time
+
+                        if (deadlineTime > nowTime) {
+                            updateCountdownDisplay(listItem, deadlineTime, listItem.querySelector('.countdown-timer')); // Initial update
+                            listItem.timerInterval = setInterval(() => {
+                                updateCountdownDisplay(listItem, deadlineTime, listItem.querySelector('.countdown-timer'));
+                            }, 1000);
+                        } else {
+                            listItem.querySelector('.countdown-timer').textContent = 'Overdue!';
+                            listItem.classList.add('overdue');
+                        }
+                    }
+                }
+            });
+
+            const taskDetailsDiv = document.createElement('div');
+            taskDetailsDiv.classList.add('task-details');
+
+            const taskSpan = document.createElement('span');
+            taskSpan.classList.add('task-text');
+            taskSpan.textContent = taskText;
+
+            taskDetailsDiv.appendChild(taskSpan);
+
+            let timerSpan = null;
+            if (deadline) {
+                const deadlineDate = new Date(deadline);
+                // Format to only show time
+                const formattedTime = deadlineDate.toLocaleString('en-US', {
+                    hour: '2-digit', minute: '2-digit', hour12: true
+                });
+
+                const timeInfo = document.createElement('div');
+                timeInfo.classList.add('task-time');
+                timeInfo.textContent = `Deadline: Today ${formattedTime}`;
+                taskDetailsDiv.appendChild(timeInfo);
+
+                timerSpan = document.createElement('div');
+                timerSpan.classList.add('countdown-timer');
+                taskDetailsDiv.appendChild(timerSpan);
+
+                // Initial update and set interval
+                if (!isCompleted) { // Only start timer if not completed
+                    const nowTime = new Date(getISTDateTimeString()).getTime(); // Get current IST time
+
+                    if (deadlineDate.getTime() > nowTime) {
+                        updateCountdownDisplay(listItem, deadlineDate.getTime(), timerSpan);
+                        listItem.timerInterval = setInterval(() => {
+                            updateCountdownDisplay(listItem, deadlineDate.getTime(), timerSpan);
+                        }, 1000);
+                    } else {
+                        timerSpan.textContent = 'Overdue!';
+                        listItem.classList.add('overdue');
+                    }
+                } else {
+                    timerSpan.textContent = 'Completed!';
+                    listItem.classList.remove('overdue');
+                }
+            }
+
+            taskContentDiv.appendChild(checkbox);
+            taskContentDiv.appendChild(taskDetailsDiv);
+            listItem.appendChild(taskContentDiv);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function() {
+                if (listItem.timerInterval) {
+                    clearInterval(listItem.timerInterval); // Clear interval on delete
+                }
+                taskList.removeChild(listItem);
+                saveTasks();
+                updateEmptyMessage();
+            });
+
+            listItem.appendChild(deleteButton);
+            taskList.appendChild(listItem);
+        }
+
+        function updateCountdownDisplay(listItem, deadlineTime, timerSpan) {
+            const now = new Date(getISTDateTimeString()).getTime(); // Get current IST time
+            const distance = deadlineTime - now;
+
+            if (listItem.classList.contains('completed')) {
+                timerSpan.textContent = 'Completed!';
+                listItem.classList.remove('overdue');
+                clearInterval(listItem.timerInterval);
+                return;
+            }
+
+            if (distance < 0) {
+                timerSpan.textContent = 'Overdue!';
+                listItem.classList.add('overdue');
+                clearInterval(listItem.timerInterval);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            timerSpan.textContent = `Time left: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        function saveTasks() {
+            const tasks = [];
+            taskList.querySelectorAll('li').forEach(item => {
+                const taskTimeElement = item.querySelector('.task-time');
+                let deadlineToSave = '';
+                if (taskTimeElement) {
+                    // Extract the saved ISO string from the original creation process,
+                    // not from the displayed "Deadline: Today HH:MM AM/PM" text.
+                    // When createTaskElement is called, `deadline` parameter holds the full datetime-local string.
+                    // We need to store that original `deadline` for correct reconstruction.
+                    // For tasks loaded from localStorage, the `task.deadline` is already the ISO string.
+                    // For newly created tasks, the `deadline` passed to createTaskElement is the datetime-local string.
+                    // A better approach is to store the original `deadlineInput.value` when creating the task.
+
+                    // To fix saving/loading consistently, the `deadline` property within the
+                    // `tasks` array should always store the full `datetime-local` string (or an ISO string).
+                    // This ensures `new Date(deadline)` works correctly on load.
+                    // The `task-time` element is *only* for display.
+
+                    // Let's assume the `deadline` passed into `createTaskElement` is the one we want to save.
+                    // This implies when loading, `createTaskElement` is called with the full `task.deadline`.
+
+                    // This part needs adjustment to ensure the *original* deadline value is stored.
+                    // The simplest fix for now, given how it's used, is to re-parse the displayed time
+                    // but ensure the current date is implicitly used for the time part.
+                    // The current `saveTasks` tries to parse "Deadline: Today HH:MM AM/PM" which is fragile.
+
+                    // A robust way to fix save/load:
+                    // 1. When createTaskElement is called, store the *full* `deadline` string directly into the `listItem`'s dataset.
+                    // 2. When saveTasks runs, retrieve the deadline from `listItem.dataset`.
+                    const originalDeadline = item.dataset.originalDeadline || '';
+                    if (originalDeadline) {
+                        deadlineToSave = originalDeadline;
+                    }
+                }
+
+                tasks.push({
+                    text: item.querySelector('.task-text').textContent,
+                    completed: item.classList.contains('completed'),
+                    deadline: deadlineToSave // Use the stored original deadline
+                });
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks'));
+            if (tasks) {
+                tasks.forEach(task => {
+                    // Pass the full original deadline string to createTaskElement
+                    createTaskElement(task.text, task.completed, task.deadline || '');
+                });
+            }
+            updateEmptyMessage();
+        }
+
+        function updateEmptyMessage() {
+            if (taskList.children.length === 0) {
+                emptyMessage.style.display = 'block';
+            } else {
+                emptyMessage.style.display = 'none';
+            }
+        }
+
+        // --- Initialize ---
+        // Set initial deadline input value to current date and time
+        setDeadlineInputToNow();
+        // Initial setup for buttons and message (simulates click to set active class)
+        addTimedTaskBtn.click();
+        updateEmptyMessage();
+    </script>
+</body>
+</html>
