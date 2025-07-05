@@ -493,6 +493,7 @@
             if (isCompleted) {
                 listItem.classList.add('completed');
             }
+            listItem.dataset.originalDeadline = deadline; // Store the original deadline
 
             const taskContentDiv = document.createElement('div');
             taskContentDiv.classList.add('task-content');
@@ -619,48 +620,14 @@
         function saveTasks() {
             const tasks = [];
             taskList.querySelectorAll('li').forEach(item => {
-                const taskTimeElement = item.querySelector('.task-time');
-                let deadlineToSave = '';
-                if (taskTimeElement) {
-                    // Extract the saved ISO string from the original creation process,
-                    // not from the displayed "Deadline: Today HH:MM AM/PM" text.
-                    // When createTaskElement is called, `deadline` parameter holds the full datetime-local string.
-                    // We need to store that original `deadline` for correct reconstruction.
-                    // For tasks loaded from localStorage, the `task.deadline` is already the ISO string.
-                    // For newly created tasks, the `deadline` passed to createTaskElement is the datetime-local string.
-                    // A better approach is to store the original `deadlineInput.value` when creating the task.
-
-                    // To fix saving/loading consistently, the `deadline` property within the
-                    // `tasks` array should always store the full `datetime-local` string (or an ISO string).
-                    // This ensures `new Date(deadline)` works correctly on load.
-                    // The `task-time` element is *only* for display.
-
-                    // Let's assume the `deadline` passed into `createTaskElement` is the one we want to save.
-                    // This implies when loading, `createTaskElement` is called with the full `task.deadline`.
-
-                    // This part needs adjustment to ensure the *original* deadline value is stored.
-                    // The simplest fix for now, given how it's used, is to re-parse the displayed time
-                    // but ensure the current date is implicitly used for the time part.
-                    // The current `saveTasks` tries to parse "Deadline: Today HH:MM AM/PM" which is fragile.
-
-                    // A robust way to fix save/load:
-                    // 1. When createTaskElement is called, store the *full* `deadline` string directly into the `listItem`'s dataset.
-                    // 2. When saveTasks runs, retrieve the deadline from `listItem.dataset`.
-                    const originalDeadline = item.dataset.originalDeadline || '';
-                    if (originalDeadline) {
-                        deadlineToSave = originalDeadline;
-                    }
-                }
-
                 tasks.push({
                     text: item.querySelector('.task-text').textContent,
                     completed: item.classList.contains('completed'),
-                    deadline: deadlineToSave // Use the stored original deadline
+                    deadline: item.dataset.originalDeadline || '' // Retrieve the stored original deadline
                 });
             });
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
-
 
         function loadTasks() {
             const tasks = JSON.parse(localStorage.getItem('tasks'));
